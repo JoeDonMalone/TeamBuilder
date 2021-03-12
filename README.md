@@ -1,4 +1,4 @@
-# TeamBuilder| :exclamation:  These works are licensed! [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  |
+# TeamBuilder
 ## Description:
 - This project is an attempt to allow H.R. the ability to dynamically build a team or series of teams and then display those teams on a screen in a clear way. It will aslo be a first attempt at using JS to draw the relationships between each team member. 
 <!-- - ![Image of Yaktocat](./Assets/Images/CodeShot.JPG) -->
