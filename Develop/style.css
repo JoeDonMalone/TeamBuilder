@@ -2,3 +2,63 @@ body {
     margin: 0;
     overflow: hidden;
   }
+
+  h1, h2 {
+    justify-content: center;
+  }
+  .main-container-flex-column {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    border: 1px black solid;
+    flex-basis: auto;
+    flex-grow:1;
+  }
+
+  .headers-title-container-flex-row {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px black solid;
+    flex: 1;
+  }
+  
+  .managers-container-flex-row{
+    display:flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    border: 1px black solid;
+    flex: 1;
+  }
+ 
+  .employees-container-flex-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px black solid;
+    /* flex-basis: 100vw; */
+    flex: 1;
+  }
+
+  /* #manager {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  } */
+
+  .card{
+    display: flex;
+    flex-wrap: wrap;
+    /* border: 1px solid red; */
+    max-width: 50px;
+    min-height: 30px;
+    margin: 10px;
+    align-items: center;
+    flex:1
+}
+
+.card-body {
+    text-align-last: center;
+}
+
