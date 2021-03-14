@@ -1,43 +1,149 @@
-$(document).ready(function(){
+const fs = require('fs');
+const inquirer = require('inquirer');
+const Manager = require('./object_classes').Manager;
+const Engineer = require('./object_classes').Engineer;
+const Intern = require('./object_classes').Intern;
+const teamMembers = []
 
-
-var managerCard =  `            
-<div id = 'manager' class="card text-white bg-primary mb-5" style="max-width: 18rem;">
-    <div class="future-date"></div>
-    <div class="card-body">
-        <h5 class="future-outlook-image"><img src='./Assets/Images/Manager-img.jpg' class = "five-day-img"></h5>
-        <h5 class="future-temperature"></h5>  
-        <h5 class="future-humidity"></h5>  
-    </div>
-</div>
-`
-
-var manager = $('#manager');
-
-class Line {
-    constructor(height, width) {
-      this.height = height;
-      this.width = width;
+function logicChain(choice) {
+    switch(choice) {
+        case 'Add a Manager to the Team':
+            return(askManager())
+        case 'Add an Engineer to the Team':
+            let engineerAnswers = askEngineer();
+            return(engineerAnswers)
+        case 'Add an Intern to the Team':
+            return('something')
+        case 'QUIT':
+            return('something')
     }
 
-    getCardCenters() {
-        $('.card').each( function() {
-            let $this = $(this);
-            let offset = $this.offset();
-            let width = $this.width();
-            let height = $this.height();
-            let centerX = offset.left + width / 2;
-            let centerY = offset.top + height / 2;
-            console.log(centerX, centerY);
-                // If you need to consider the padding property in your calculations, use the following:
-            // var width = $this.outerWidth();
-            // var height = $this.outerHeight();   
+    function askManager() {
+        // name, EID, email, phone
+       const managerQuestions = [
+            {
+                type: 'input',
+                name: 'name',
+                message: "What is the Manager Name?"
+            },
+            {
+                type: 'input',
+                name: 'EID',
+                message: "What is the Manager's ID?"
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: "What is the Manager's email?"
+            },
+            {
+                type: 'input',
+                name: 'phone',
+                message: 'What is the Manager Phone Number?'
+            }, 
+            {
+                type: 'confirm',
+                name: 'askAgain',
+                message: 'Would you like to add another Manager? (Enter for YES)?',
+                default: true,
+              }
+        ];
+
+        let managerOutput = [];
+
+        function ask() {
+            inquirer.prompt(managerQuestions).then((answers) => {
+              if (answers.askAgain) {
+                managerOutput.push(answers);
+                ask();
+              } else {
+                  managerOutput.push(answers);
+                //   console.log(answerOutput);
+                  return(managerOutput);
+                }
+            });
+        }
+        ask();
+
+        teamMembers.push(managerOutput)
+    }
+
+    function askEngineer() {
+        // name, EID, email , github
+       const engineerQuestions = [
+            {
+                type: 'input',
+                name: 'name',
+                message: "What is the Engineer Name?"
+            },
+            {
+                type: 'input',
+                name: 'EID',
+                message: "What is the Engineer ID?"
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: "What is the Engineer email?"
+            },
+            {
+                type: 'input',
+                name: 'phone',
+                message: "What is the Engineer's github username(Not a url, only the Username)?"
+            }, 
+            {
+                type: 'confirm',
+                name: 'askAgain',
+                message: 'Would you like to add another Engineer? (Enter for YES)?',
+                default: true,
+              }
+        ];
+
+        let engineerOutput = [];
+
+        function ask() {
+            inquirer.prompt(engineerQuestions).then((answers) => {
+              if (answers.askAgain) {
+                engineerOutput.push(answers);
+                ask();
+              } else {
+                  engineerOutput.push(answers);
+                  return(answerOutput);
+                }
+            });
+        }
+        ask();
+    }
+}
+
+const processQuestions = [
+        {
+        type: 'list',
+        name: 'process',
+        message: 'What would you like to do?',
+        choices: [ "Add a Manager to the Team", "Add an Engineer to the Team","Add an Intern to the Team", "QUIT"]
+        }
+    ]
+
+
+    inquirer.prompt (processQuestions)
+        .then(answers => {
+            logicChain(answers.process)
         })
-    }
-  }
-    $('a[href^="http://"]').each(function(){ 
-        $(this).attr("href", newUrl); // Set herf value
-    });
-});
+        .catch( error => {
+            if(error) {
+                console.log(error);
+            }
+        })
+    
+    // const managerCard = new Manager('joe', '1234', 'j@j.com', '1234568910').createManagerCard();
+    // console.log(managerCard)
+      
+// // var engineerCard = `
+// // `        
+// // var internCard = `
+// // `            
 
-// for(var i = 5)
+// // var manager = $('#manager');
+// // var engineer = $('.engineer');
+// // var intern = $('intern')
