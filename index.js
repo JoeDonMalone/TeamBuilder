@@ -236,6 +236,9 @@ function writeHTML() {
     </html>`
 }
 
-askQuestions();
-    // const managerCard = new Manager('joe', '1234', 'j@j.com', '1234568910').createManagerCard();
-    // console.log(managerCard)
+// askQuestions();
+
+
+var managerObject = new Manager('Joe Don Malone', '1234', 'joe.d.malone@gmail.com', '830-220-0942');
+console.log(managerObject.createManagerCard());
+console.log(managerObject.getRole());
