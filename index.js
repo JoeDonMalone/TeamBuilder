@@ -3,7 +3,10 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/object_classes').Manager;
 const Engineer = require('./lib/object_classes').Engineer;
 const Intern = require('./lib/object_classes').Intern;
-const teamMembers = { managers: [], employees: [], engineers: [], interns: [] }
+const teamMembers = { managers: [], engineers: [], interns: [] }
+const managerDivs = []
+const engineerDivs = []
+const internDivs = []
 
 function askManager() {
     // name, EID, email, phone
@@ -170,7 +173,9 @@ function askQuestions() {
             askIntern();
         } 
         else { 
-            writeHTML();
+            // writeHTML();
+            console.log('Exited')
+            getEmployeecards();
         };
     })
     .catch( error => {
@@ -181,7 +186,7 @@ function askQuestions() {
 }
 
 function writeHTML() {
-    html = `<!DOCTYPE html>
+   var html = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -190,7 +195,7 @@ function writeHTML() {
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <link rel="stylesheet" href="./Develop/style.css">
+        <link rel="stylesheet" href="./dist/style.css">
         <title>Team Builder</title>
     </head>
     <body>
@@ -205,9 +210,9 @@ function writeHTML() {
                 <h2> Management</h2>
             </div>
             <div class = 'manager-container-row'>
+            ${managerDivs}
             </div>
-    
-    
+
             <div class = 'emp-intern-column'>
     
                 <div class = 'intern-employee-container'>
@@ -234,11 +239,30 @@ function writeHTML() {
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     </body>
     </html>`
+    return(html)
 }
 
-// askQuestions();
+askQuestions();
 
+function getEmployeecards() {
+    let managers = teamMembers.managers;
+    let engineers = teamMembers.engineers;
+    let interns = teamMembers.interns;
 
-var managerObject = new Manager('Joe Don Malone', '1234', 'joe.d.malone@gmail.com', '830-220-0942');
-console.log(managerObject.createManagerCard());
-console.log(managerObject.getRole());
+    managers.forEach(manager => {
+        var managerObject = new Manager(manager);
+        managerDivs.push(managerObject.createManagerCard());
+    });
+
+    engineers.forEach(engineer => {
+        var engineerObject = new Engineer(engineer);
+        engineerDivs.push(engineerObject.createEngineerCard());
+    })
+
+    interns.forEach(intern => {
+        var internObject = new Intern(intern);
+        internDivs.push(internObject.createInternCard());
+    })
+    fs.writeFile('testing.html', writeHTML(), (err) =>
+  err ? console.error(err) : console.log('Success!'));}
+
