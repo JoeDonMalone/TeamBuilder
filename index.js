@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/object_classes').Manager;
 const Engineer = require('./lib/object_classes').Engineer;
 const Intern = require('./lib/object_classes').Intern;
-const teamMembers = { managers: [], engineers: [], interns: [] }
+const teamMembers = { managers: [], employees:[], engineers: [], interns: [] }
 const managerDivs = []
 const engineerDivs = []
 const internDivs = []
@@ -77,7 +77,7 @@ function askEngineer() {
         },
         {
             type: 'input',
-            name: 'phone',
+            name: 'github',
             message: "What is the Engineer's github username(Not a url, only the Username)?"
         }, 
         {
@@ -126,7 +126,7 @@ function askIntern() {
         },
         {
             type: 'input',
-            name: 'phone',
+            name: 'school',
             message: "What school/university is the intern currently attending?"
         }, 
         {
@@ -210,13 +210,14 @@ function writeHTML() {
                 <h2> Management</h2>
             </div>
             <div class = 'manager-container-row'>
-            ${managerDivs}
+                ${managerDivs.join('')}
             </div>
 
             <div class = 'emp-intern-column'>
     
                 <div class = 'intern-employee-container'>
                     <div class = 'intern-employee-container-flex-row'>
+                        ${engineerDivs.join('')}
                     </div>
                     <div class = 'headers-title-container-flex-row'>
                         <h3>Engineers</h3>
@@ -225,6 +226,7 @@ function writeHTML() {
     
                 <div class = 'intern-employee-container'>
                     <div class = 'intern-employee-container-flex-row'>
+                        ${internDivs.join('')}
                     </div>
                     <div class = 'headers-title-container-flex-row'>
                         <h3>Interns</h3>
@@ -257,12 +259,14 @@ function getEmployeecards() {
     engineers.forEach(engineer => {
         var engineerObject = new Engineer(engineer);
         engineerDivs.push(engineerObject.createEngineerCard());
-    })
+    });
 
     interns.forEach(intern => {
         var internObject = new Intern(intern);
         internDivs.push(internObject.createInternCard());
-    })
+    });
+
     fs.writeFile('testing.html', writeHTML(), (err) =>
-  err ? console.error(err) : console.log('Success!'));}
+  err ? console.error(err) : console.log('Success!'));
+}
 
