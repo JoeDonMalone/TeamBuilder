@@ -269,3 +269,6 @@ function getEmployeecards() {
   err ? console.error(err) : console.log('Success!'));
 }
 
+function drawLines() {
+    
+}
