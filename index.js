@@ -159,7 +159,7 @@ function askQuestions() {
             type: 'list',
             name: 'process',
             message: 'What would you like to do?',
-            choices: [ "Add a Manager to the Team", "Add an Employee to the Team", "Add an Engineer to the Team","Add an Intern to the Team", "DONE. Take Me to My Team!"]
+            choices: [ "Add a Manager to the Team", "Add an Engineer to the Team", "Add an Intern to the Team", "DONE. Take Me to My Team!"]
     }
 
     inquirer.prompt (processQuestions).then((answers) => {
@@ -174,7 +174,6 @@ function askQuestions() {
         } 
         else { 
             // writeHTML();
-            console.log('Exited')
             getEmployeecards();
         };
     })
