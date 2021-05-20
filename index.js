@@ -45,11 +45,9 @@ function askManager() {
         inquirer.prompt(managerQuestions).then((answers) => {
           if (answers.askAgain) {
             teamMembers.managers.push(answers)
-            console.log(teamMembers)
             ask();
           } else {
             teamMembers.managers.push(answers)
-              console.log(teamMembers);
               return(askQuestions());
             }
         });
@@ -94,11 +92,9 @@ function askEngineer() {
         inquirer.prompt(engineerQuestions).then((answers) => {
           if (answers.askAgain) {
             teamMembers.engineers.push(answers)
-            console.log(teamMembers)
             ask();
           } else {
             teamMembers.engineers.push(answers)
-              console.log(teamMembers)
               return(askQuestions());
             }
         });
@@ -132,7 +128,7 @@ function askIntern() {
         {
             type: 'confirm',
             name: 'askAgain',
-            message: 'Would you like to add another Engineer? (Enter for YES)?',
+            message: 'Would you like to add another Intern? (Enter for YES)?',
             default: true,
           }
     ];
@@ -141,11 +137,9 @@ function askIntern() {
         inquirer.prompt(internQuestions).then((answers) => {
           if (answers.askAgain) {
             teamMembers.interns.push(answers)
-            console.log(teamMembers)
             ask();
           } else {
             teamMembers.interns.push(answers)
-              console.log(teamMembers)
               return(askQuestions());
             }
         });
@@ -265,7 +259,7 @@ function getEmployeecards() {
         internDivs.push(internObject.createInternCard());
     });
 
-    fs.writeFile('testing.html', writeHTML(), (err) =>
+    fs.writeFile('index.html', writeHTML(), (err) =>
   err ? console.error(err) : console.log('Success!'));
 }
 
